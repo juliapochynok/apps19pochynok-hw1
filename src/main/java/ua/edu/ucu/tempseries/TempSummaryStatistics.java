@@ -7,7 +7,8 @@ public class TempSummaryStatistics {
     private final double maxTemp;
 
 
-    public TempSummaryStatistics(double avg, double dev, double maxim, double minim) {
+    public TempSummaryStatistics(double avg, double dev,
+                                 double maxim, double minim) {
         this.avgTemp = avg;
         this.devTemp = dev;
         this.maxTemp = maxim;
