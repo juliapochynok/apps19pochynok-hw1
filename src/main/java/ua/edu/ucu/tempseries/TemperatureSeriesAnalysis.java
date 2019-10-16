@@ -7,15 +7,16 @@ import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
     private double[] temperatures;
-    private final double LOWEST_TEMP= -273.0;
+    private final double lowestTemp = -273.0;
 
     public TemperatureSeriesAnalysis() {
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        temperatures = Arrays.copyOf(temperatureSeries, temperatureSeries.length);
+        temperatures = Arrays.copyOf(temperatureSeries,
+                temperatureSeries.length);
         for (double el : temperatures) {
-            if (el < LOWEST_TEMP) {
+            if (el < lowestTemp) {
                 throw new InputMismatchException();
             }
         }
@@ -40,7 +41,8 @@ public class TemperatureSeriesAnalysis {
         else {
             double sumSquare = 0.0;
             for (double el: temperatures) {
-                double localSquare = (el - this.average())*(el - this.average());
+                double localSquare = (el - this.average())*
+                        (el - this.average());
                 sumSquare = sumSquare + localSquare;
             }
             double finalDeviation = Math.sqrt(sumSquare/temperatures.length);
@@ -75,7 +77,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double findTempClosestToZero() {
-        double small = 0.0000001;
+        final double small = 0.0000001;
         if (temperatures.length == 0) {
             throw new IllegalArgumentException();
         }
@@ -91,7 +93,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double findTempClosestToValue(double tempValue) {
-        double small = 0.0000001;
+        final double small = 0.0000001;
         if (temperatures.length == 0) {
             throw new IllegalArgumentException();
         }
@@ -141,7 +143,8 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException();
         }
         else {
-            TempSummaryStatistics newStat = new TempSummaryStatistics(this.average(),
+            TempSummaryStatistics newStat =
+                    new TempSummaryStatistics(this.average(),
                     this.deviation(), this.max(), this.min());
             return newStat;
         }
@@ -172,7 +175,8 @@ public class TemperatureSeriesAnalysis {
                 lengthTemp--;
             }
             else {
-                temperatures = Arrays.copyOf(temperatures, temperatures.length*2);
+                temperatures = Arrays.copyOf(temperatures,
+                        temperatures.length*2);
             }
         }
         return (int) this.sum();
