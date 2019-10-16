@@ -41,8 +41,8 @@ public class TemperatureSeriesAnalysis {
         else {
             double sumSquare = 0.0;
             for (double el: temperatures) {
-                double localSquare = (el - this.average())*
-                        (el - this.average());
+                double localSquare = (el - this.average())
+                        * (el - this.average());
                 sumSquare = sumSquare + localSquare;
             }
             double finalDeviation = Math.sqrt(sumSquare/temperatures.length);
@@ -77,7 +77,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double findTempClosestToZero() {
-        final double small = 0.0000001;
+        final double SMALL = 0.0000001;
         if (temperatures.length == 0) {
             throw new IllegalArgumentException();
         }
@@ -85,7 +85,7 @@ public class TemperatureSeriesAnalysis {
         for (double el : temperatures) {
             if (Math.abs(el) < Math.abs(closest)) {
                 closest = el;
-            } else if (Math.abs(el - closest) < small && el > closest) {
+            } else if (Math.abs(el - closest) < SMALL && el > closest) {
                     closest = el;
             }
         }
@@ -93,7 +93,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double findTempClosestToValue(double tempValue) {
-        final double small = 0.0000001;
+        final double SMALL = 0.0000001;
         if (temperatures.length == 0) {
             throw new IllegalArgumentException();
         }
@@ -104,7 +104,7 @@ public class TemperatureSeriesAnalysis {
             if (difference < closestDist) {
                 closestNum = el;
                 closestDist = difference;
-            } else if (Math.abs(difference - closestDist) < small
+            } else if (Math.abs(difference - closestDist) < SMALL
                     && el > closestNum) {
                     closestNum = el;
             }
