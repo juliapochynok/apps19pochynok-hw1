@@ -1,24 +1,22 @@
 package ua.edu.ucu.tempseries;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.lang.Math;
 
-import static java.util.Arrays.*;
+import static java.util.Arrays.copyOf;
 
 
 public class TemperatureSeriesAnalysis {
     private double[] temperatures;
-    private int LowestTemp = -273;
+    private int lowestTemp = -273;
 
     public TemperatureSeriesAnalysis() {
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        temperatures = Arrays.copyOf(temperatureSeries, temperatureSeries.length);
+        temperatures = copyOf(temperatureSeries, temperatureSeries.length);
         for (double el : temperatures) {
-            if (el < LowestTemp) {
+            if (el < lowestTemp) {
                 throw new InputMismatchException();
             }
         }
@@ -85,10 +83,8 @@ public class TemperatureSeriesAnalysis {
         for (double el : temperatures) {
             if (Math.abs(el) < Math.abs(closest)) {
                 closest = el;
-            } else if (Math.abs(el) == Math.abs(closest)) {
-                if (el > closest) {
+            } else if (Math.abs(el - closest) < .0000001 & el > closest) {
                     closest = el;
-                }
             }
         }
         return closest;
@@ -105,10 +101,8 @@ public class TemperatureSeriesAnalysis {
             if (difference < closestDist) {
                 closestNum = el;
                 closestDist = difference;
-            } else if (difference == closestDist) {
-                if (el > closestNum) {
+            } else if (Math.abs(difference - closestDist) < .0000001 && el > closestNum) {
                     closestNum = el;
-                }
             }
         }
         return closestNum;
@@ -119,7 +113,7 @@ public class TemperatureSeriesAnalysis {
         int i = 0;
         for (double el : temperatures) {
             if (el < tempValue) {
-                newTemp = Arrays.copyOf(newTemp, newTemp.length + 1);
+                newTemp = copyOf(newTemp, newTemp.length + 1);
                 newTemp[i] = el;
                 i++;
             }
@@ -132,7 +126,7 @@ public class TemperatureSeriesAnalysis {
         int i = 0;
         for (double el : temperatures) {
             if (el > tempValue) {
-                newTemp = Arrays.copyOf(newTemp, newTemp.length + 1);
+                newTemp = copyOf(newTemp, newTemp.length + 1);
                 newTemp[i] = el;
                 i++;
             }
@@ -175,7 +169,7 @@ public class TemperatureSeriesAnalysis {
                 lengthTemp--;
             }
             else {
-                temperatures = Arrays.copyOf(temperatures, temperatures.length*2);
+                temperatures = copyOf(temperatures, temperatures.length*2);
             }
         }
         return (int) this.sum();
